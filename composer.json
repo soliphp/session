@@ -18,7 +18,7 @@
     "require": {
         "php": ">=7.0",
         "ext-json": "*",
-        "soliphp/framework": "dev-master",
+        "soliphp/framework": "^2.0",
         "soliphp/helpers": "^1.1",
         "soliphp/view": "^1.0",
         "nikic/fast-route": "^1.3",
