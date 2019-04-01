@@ -1,0 +1,50 @@
+{
+    "name": "soliphp/web",
+    "description": "Soli PHP web.",
+    "type": "library",
+    "keywords": ["web", "http", "soliphp", "soli"],
+    "homepage": "https://github.com/soliphp/web",
+    "support": {
+        "issues": "https://github.com/soliphp/web/issues",
+        "source": "https://github.com/soliphp/web"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ueaner",
+            "email": "ueaner@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "ext-json": "*",
+        "soliphp/framework": "dev-master",
+        "soliphp/helpers": "^1.1",
+        "soliphp/view": "^1.0",
+        "nikic/fast-route": "^1.3",
+        "vlucas/phpdotenv": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Soli\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Soli\\Tests\\": "tests/"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.laravel-china.org"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
