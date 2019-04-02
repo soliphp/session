@@ -104,7 +104,7 @@ class RouterTest extends TestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessageRegExp /Method Not Allowed, allowed:.+/
+     * @expectedExceptionMessage Method Not Allowed
      */
     public function testMethodNotAllowedException()
     {

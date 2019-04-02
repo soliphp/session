@@ -116,11 +116,15 @@ class Router implements RouterInterface
      */
     public function dispatch($uri = null)
     {
+        $httpMethod = $this->getRequestMethod();
+        if (empty($uri)) {
+            $uri = $this->getRewriteUri();
+        }
+
         $this->handleDispatcherResponse(
-            $this->createDispatcher()->dispatch(
-                $this->getRequestMethod(),
-                $uri ?: $this->getRewriteUri()
-            )
+            $this->createDispatcher()->dispatch($httpMethod, $uri),
+            $httpMethod,
+            $uri
         );
     }
 
@@ -146,16 +150,18 @@ class Router implements RouterInterface
      * Handle the response from the FastRoute dispatcher.
      *
      * @param array $routeInfo
+     * @param string $httpMethod
+     * @param string $uri
      * @throws Exception
      */
-    protected function handleDispatcherResponse($routeInfo)
+    protected function handleDispatcherResponse($routeInfo, $httpMethod, $uri)
     {
         if ($routeInfo[0] == \FastRoute\Dispatcher::NOT_FOUND) {
-            throw new Exception('Not found handler');
+            throw new Exception("Not found handler: $uri", 404);
         }
         if ($routeInfo[0] == \FastRoute\Dispatcher::METHOD_NOT_ALLOWED) {
             $allowed = (array)$routeInfo[1];
-            throw new Exception('Method Not Allowed, allowed: ' . implode(',', $allowed));
+            throw new Exception("Method Not Allowed: $uri, allowed: " . implode(',', $allowed), 405);
         }
 
         // \FastRoute\Dispatcher::FOUND
