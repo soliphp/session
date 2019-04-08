@@ -21,6 +21,9 @@ class Router implements RouterInterface
     public function __construct()
     {
         $this->defaultNamespaceName = "App\\Controllers\\";
+
+        // default routes
+        $this->map('/', [], '*');
     }
 
     /**
@@ -136,10 +139,6 @@ class Router implements RouterInterface
     protected function createDispatcher()
     {
         return $this->dispatcher ?: \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
-            // 默认路由
-            if (!isset($this->routes['/'])) {
-                $this->map('/', [], '*');
-            }
             foreach ($this->routes as $pattern => $route) {
                 $r->addRoute($route['methods'], $pattern, $route['handler']);
             }
